@@ -3,6 +3,7 @@
 <head>
     <title>@yield('page-title', "User") - Pierre</title>
     <link rel="stylesheet" href="">
+    @yield("additionnal-stylesheets")
 
 </head>
 <body>

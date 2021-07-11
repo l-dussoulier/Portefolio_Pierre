@@ -21,10 +21,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['trusted.administrator'])->name('dashboard');
 
+
+
 Route::get('/dashboard/dessins', [\App\Http\Controllers\DessinsController::class, 'list'])->name('dessins');
 
+Route::get('/dessins', [\App\Http\Controllers\DessinsUserController::class, 'list'])->name('dessinsUser');
 
-Route::get('/dashboard/create',[\App\Http\Controllers\CreateController::class, 'index'])->name('create');
+
+
+
+Route::get('/create', function (){
+    return view('create');
+})->middleware(['trusted.login'])->name('create');
+
+
 Route::get('/dashboard/edit/{id}/',[\App\Http\Controllers\CreateController::class, 'edit'])->name('edit');
 
 Route::post('/submit', [\App\Http\Controllers\CreateController::class, 'store'])->name("store-draw-request");

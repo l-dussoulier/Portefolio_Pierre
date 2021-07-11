@@ -26,8 +26,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#moi">À propros de moi</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Mes créations</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#"></a></li>
+                <li class="nav-item"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                        Logout
+                    </a> </li>
+                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </ul>
         </div>
     </div>
@@ -118,7 +123,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <a class="btn btn-danger btn-xl js-scroll-trigger" href="/dashboard/">Demande de dessin !</a>
+                <a class="btn btn-danger btn-xl js-scroll-trigger" href="/create">Demande de dessin !</a>
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@ class CreateController extends Controller
     public function index() {
 
         $user = Auth::user();
-        $user->assignRole('Administrateur');
+        //$user->assignRole('Administrateur');
 
         return view('create');
     }
@@ -26,8 +26,7 @@ class CreateController extends Controller
 
     public function store(Request $request)
     {
-        //dd(Auth::check());
-        //dd($request->all());
+
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:1000'
@@ -37,14 +36,16 @@ class CreateController extends Controller
         $drawRequest->title = $request->get('titre');
         $drawRequest->description = $request->get('description');
         $drawRequest->author_id =Auth::user()->id;
+        $drawRequest->statut = 1;
 
         $drawRequest->save();
 
 
-        return back()->with([
-            "message" => "Demande de dessin " . $drawRequest->title . " créée",
-            "status" => "success"
-        ]);
+        //return back()->with([
+          //  "message" => "Demande de dessin " . $drawRequest->title . " créée",
+           // "status" => "success"
+        //]);
+        return redirect('');
     }
 
     public function edit($id)
