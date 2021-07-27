@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dessin;
+use App\Models\Statut;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,8 @@ class CreateController extends Controller
     }
 
     public function submit(Request $request){
-        error_log('BG');
-        Log::info('message');
+
+        dd($request->all());
         Dessin::create($request->all());
     }
 
@@ -31,14 +32,24 @@ class CreateController extends Controller
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:1000'
         ]);
+        if(Dessin::find($request->get('id'))== null){
+            $drawRequest = new Dessin();
+            $drawRequest->title = $request->get('titre');
+            $drawRequest->description = $request->get('description');
+            $drawRequest->author_id =Auth::user()->id;
 
-        $drawRequest = new Dessin();
-        $drawRequest->title = $request->get('titre');
-        $drawRequest->description = $request->get('description');
-        $drawRequest->author_id =Auth::user()->id;
-        $drawRequest->statut = 1;
+            $drawRequest->id_statut = 1;
 
-        $drawRequest->save();
+            $drawRequest->save();
+        }else{
+            $dessin = Dessin::find($request->get('id'));
+            $dessin-> title = $request->get('titre');
+            $dessin->description = $request->get('description');
+            $dessin->statut =$request->get('statut');
+
+            $dessin->save();
+
+        }
 
 
         //return back()->with([
@@ -54,4 +65,13 @@ class CreateController extends Controller
 
         return view('edit', compact('currentDraw'));
     }
+
+    public function delete($id)
+    {
+        $deleteDraw = Dessin::where('id',$id)->first();
+        $deleteDraw->delete();
+
+        return redirect('/dashboard/dessins');
+    }
+
 }

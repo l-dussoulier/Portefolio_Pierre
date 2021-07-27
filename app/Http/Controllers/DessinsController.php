@@ -14,7 +14,7 @@ class DessinsController extends Controller
     }
 
     public function list() {
-        $dessins = Dessin::all();
+        $dessins = Dessin::all()->sortByDesc('created_at');
 
         //dd($this->jsonService::stringToJson());
 

@@ -37,6 +37,8 @@ Route::get('/create', function (){
 
 Route::get('/dashboard/edit/{id}/',[\App\Http\Controllers\CreateController::class, 'edit'])->name('edit');
 
+Route::get('/delete/{id}/',[\App\Http\Controllers\CreateController::class, 'delete'])->name('delete');
+
 Route::post('/submit', [\App\Http\Controllers\CreateController::class, 'store'])->name("store-draw-request");
 
 

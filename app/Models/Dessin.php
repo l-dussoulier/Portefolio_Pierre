@@ -18,5 +18,6 @@ class Dessin extends Model
         'title',
         'description',
         'author_Id',
+        'statut'
     ];
 }
