@@ -7,9 +7,6 @@
     </x-slot>
 
 
-        <title>
-            Tailwind Starter Template - Landing Page Template: Tailwind Toolbox
-        </title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <meta name="author" content="" />
@@ -20,6 +17,15 @@
         <style>
             .gradient {
                 background: linear-gradient(90deg, #444444 0%, #171717 100%);
+            }
+
+
+            <!-- Changement de couleur pour la nav bar -->
+            nav.bg-white a.toggleColour {
+                color: #000 !important;
+            }
+            nav.bg-white a > svg {
+                fill: #000 !important;
             }
         </style>
 
@@ -49,12 +55,11 @@
             </div>
             <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
                 <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                    @if(Auth::check())
                     <li class="mr-3">
-                        <a class="inline-block py-2 px-4 text-white no-underline" href="{{ route('create') }}">Demande</a>
+                        <a class="toggleColour inline-block text-white no-underline hover:text-gray-300 hover:text-underline py-2 px-4" href="#">Demande en cours</a>
                     </li>
-                    <li class="mr-3">
-                        <a class="inline-block text-white no-underline hover:text-gray-300 hover:text-underline py-2 px-4" href="#">Demande en cours</a>
-                    </li>
+                    @endif
                     @if(!Auth::check())
                     <li>
                         <a id="navAction" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-2 lg:mt-0 py-2 px-4 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" href="/login">Connexion</a>
@@ -67,7 +72,7 @@
                             </li>
                        @endif
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form class="toggleColour" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')"
@@ -535,7 +540,7 @@
                 <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
                     <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="p-8 text-3xl font-bold text-center border-b-4">
-                            Free
+                            A5
                         </div>
                         <ul class="w-full text-center text-sm">
                             <li class="border-b py-4">Thing</li>
@@ -545,19 +550,17 @@
                     </div>
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                            £0
-                            <span class="text-base">for one user</span>
+                            30€
+                            <span class="text-base">/ par dessin</span>
                         </div>
                         <div class="flex items-center justify-center">
-                            <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                Sign Up
-                            </button>
+                            <a class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" href="{{ route('create') }}"> Commander</a>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                        <div class="w-full p-8 text-3xl font-bold text-center">Basic</div>
+                        <div class="w-full p-8 text-3xl font-bold text-center">A4</div>
                         <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
                         <ul class="w-full text-center text-base font-bold">
                             <li class="border-b py-4">Thing</li>
@@ -568,20 +571,18 @@
                     </div>
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-4xl font-bold text-center">
-                            £x.99
-                            <span class="text-base">/ per user</span>
+                            60€
+                            <span class="text-base">/ par dessin</span>
                         </div>
                         <div class="flex items-center justify-center">
-                            <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                Sign Up
-                            </button>
+                            <a class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" href="{{ route('create', ['format' => 'A0']) }}"> Commander</a>
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
                     <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="p-8 text-3xl font-bold text-center border-b-4">
-                            Pro
+                            A3
                         </div>
                         <ul class="w-full text-center text-sm">
                             <li class="border-b py-4">Thing</li>
@@ -591,13 +592,11 @@
                     </div>
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
-                            £x.99
-                            <span class="text-base">/ per user</span>
+                            90€
+                            <span class="text-base">/ par dessin</span>
                         </div>
                         <div class="flex items-center justify-center">
-                            <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                                Sign Up
-                            </button>
+                            <a class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out" href="{{ route('create') }}"> Commander</a>
                         </div>
                     </div>
                 </div>
@@ -628,16 +627,16 @@
     </svg>
     <section class="container mx-auto text-center py-6 mb-12">
         <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-            Call to Action
+            Demander un devis personnalisé
         </h1>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
-        <h3 class="my-4 text-3xl leading-tight">
-            Main Hero Message to sell yourself!
+        <h3 class="my-4 text-2xl text-white leading-tight" >
+            Expliquer votre créativé pour le plus fou de vos projets
         </h3>
-        <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            Action!
+        <button class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out hover:none">
+            Devis personnalisé !
         </button>
     </section>
     <!--Footer-->
@@ -689,7 +688,7 @@
                             <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Facebook</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
-                            <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Linkedin</a>
+                            <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Instagram</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#" class="no-underline hover:underline text-gray-800 hover:text-pink-500">Twitter</a>

@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Dessins
+            {{ __("Page d'accueil") }}
         </h2>
     </x-slot>
 
     <div class="overflow-x-auto">
-        <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+        <div class="min-w-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
             <div class="w-full lg:w-5/6">
                 <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
@@ -17,6 +17,7 @@
                             <th class="py-3 px-6 text-left">Date demande</th>
                             <th class="py-3 px-6 text-center">Statut</th>
                             <th class="py-3 px-6 text-center">Autheur</th>
+                            <th class="py-3 px-6 text-center">Contact</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                         </thead>
@@ -39,11 +40,16 @@
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
-                                <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Non commencé</span>
+                                <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">{{ \App\Models\statut::findOrFail($dessin->id_statut)->name }}</span>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center text-center">
                                     <span>{{ \App\Models\User::findOrFail($dessin->author_id)->name }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex items-center text-center">
+                                    <span>{{ $dessin->contact }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">

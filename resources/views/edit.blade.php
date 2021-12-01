@@ -12,18 +12,31 @@
     @endif
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form action="{{ route('store-draw-request') }}" method="post" class="form-group">
                         @csrf
-                        <input class="hide" name="id" value="{{ $currentDraw->id }}">
-                        <div class="col-span-6 sm:col-span-3">
+                        <input hidden type="text" name="id" value="{{ $currentDraw->id }}">
+                            <input type="submit" value="Modifier" class="mb-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ">
+
+                        <!-- Autor -->
+                        <div class="col-span-6 sm:col-span-3 mb-5">
+                            <label for="titre" class="block text-sm font-medium text-gray-700">Auteur du dessin</label>
+                            <input type="text" name="titre" id="titre" value="{{ $user->name }}" disabled autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md disabled:opacity-50">
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3 mb-5">
+                            <label for="contact" class="block text-sm font-medium text-gray-700">Contact</label>
+                            <input type="text" name="contact" id="contact" value="{{ $currentDraw->contact }}" disabled autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md disabled:opacity-50">
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3 mb-5">
                             <label for="titre" class="block text-sm font-medium text-gray-700">Titre du dessin</label>
                             <input type="text" name="titre" id="titre" value="{{ $currentDraw->title }}" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
 
-                        <div>
+                        <div class="mb-5">
                             <label for="description" class="block text-sm font-medium text-gray-700">
                                 Description
                             </label>
@@ -32,22 +45,29 @@
                             </div>
                         </div>
 
-                        <div>
-                            <select name="statut" id="IdStatut">
-                                <option value="0">Non commencé</option>
-                                <option value="1">En étude</option>
-                                <option value="2">En cours</option>
-                                <option value="3">Finalisation</option>
-                                <option value="4">Terminé</option>
-                            </select>
+                        <div  class="mt-5">
+                            <div class="grid md:grid-cols-2">
+                                <div>
+                                    <label for="idStatut" class="mb-5">Avancement du dessin</label>
+                                    <select name="statut" id="IdStatut" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-5/6 sm:text-sm border-gray-300 rounded-md">
+                                        @foreach($statuts as $statut)
+                                            <option value="{{ $statut->id }}" @if($currentDraw->id_statut == $statut->id) selected="selected" @endif>{{ $statut->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">Date demande</label>
+                                    <input type="text"  value="{{ $currentDraw->created_at->format('d/m/Y H:i') }}" disabled autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-5/6 shadow-sm sm:text-sm border-gray-300 rounded-md disabled:opacity-50">
+                                </div>
+                            </div>
 
 
+                            <div class="mt-10">
+                                <img src="{{ Storage::url($currentDraw->linkImage) }}" alt="">
+                            </div>
                         </div>
 
 
-                                <div class="row">
-                        <input type="submit" value="Envoyer" class="">
-                                </div>
 
                     </form>
                 </div>
