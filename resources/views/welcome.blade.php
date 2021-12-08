@@ -57,7 +57,7 @@
                 <ul class="list-reset lg:flex justify-end flex-1 items-center">
                     @if(Auth::check())
                     <li class="mr-3">
-                        <a class="toggleColour inline-block text-white no-underline hover:text-gray-300 hover:text-underline py-2 px-4" href="#">Demande en cours</a>
+                        <a class="toggleColour inline-block text-white no-underline hover:text-gray-300 hover:text-underline py-2 px-4" href="{{ route('dessinsUser')}}">Demande en cours</a>
                     </li>
                     @endif
                     @if(!Auth::check())

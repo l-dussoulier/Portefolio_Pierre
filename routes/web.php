@@ -25,7 +25,16 @@ Route::get('/dashboard', function () {
 
 Route::get('/dashboard/dessins', [\App\Http\Controllers\DessinsController::class, 'list'])->name('dessins');
 
-Route::get('/dessins', [\App\Http\Controllers\DessinsUserController::class, 'list'])->name('dessinsUser');
+
+
+Route::get('/dessins', [\App\Http\Controllers\DessinsController::class, 'listUser'])->name('dessinsUser');
+
+Route::get('/edit/{id}/',[\App\Http\Controllers\CreateController::class, 'editUser'])->name('editUser'); // edit user
+
+Route::post('/submitUser', [\App\Http\Controllers\DessinsUserController::class, 'store'])->name("store-draw-requestUser"); // submit user
+
+
+
 
 
 
@@ -38,6 +47,8 @@ Route::get('/dashboard/edit/{id}/',[\App\Http\Controllers\CreateController::clas
 Route::get('/delete/{id}/',[\App\Http\Controllers\CreateController::class, 'delete'])->name('delete');
 
 Route::post('/submit', [\App\Http\Controllers\CreateController::class, 'store'])->name("store-draw-request");
+
+
 
 
 

@@ -33,7 +33,8 @@ class CreateController extends Controller
 
         $request->validate([
             'titre' => 'required|string|max:255',
-            'description' => 'required|string|max:1000'
+            'description' => 'required|string|max:1000',
+            'image' => 'max:500000',
         ]);
 
         if(Dessin::find($request->get('id')) == null){
@@ -74,6 +75,13 @@ class CreateController extends Controller
         $user = User::where('id',$currentDraw->author_id)->first();
 
         return view('edit', compact('currentDraw','user','statuts'));
+    }
+
+    public function editUser($id) // edit user
+    {
+        $currentDraw = Dessin::where('id', $id)->where('author_id',Auth::user()->id)->first();
+
+        return view('dessins.ListUser.editUser', compact('currentDraw'));
     }
 
     public function delete($id)
