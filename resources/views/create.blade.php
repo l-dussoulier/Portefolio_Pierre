@@ -85,9 +85,9 @@
                         @csrf
                         <label for="format" class="block text-sm font-medium text-gray-700 mt-2">Format</label>
                         <select class="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border-gray-300 rounded-lg appearance-none focus:shadow-outline mb-3" placeholder="Regular input">
-                            <option value="A3" {{ $format === "A3" ? 'selected' : '' }}>Format A3</option>
+                            <option value="A3" {{ $format === "A5" ? 'selected' : '' }}>Format A5</option>
                             <option value="A4" {{ $format === "A4" ? 'selected' : '' }}>Format A4</option>
-                            <option value="A0" {{ $format === "A0" ? 'selected' : '' }}>Format A0</option>
+                            <option value="A0" {{ $format === "A3" ? 'selected' : '' }}>Format A3</option>
                             <option></option>
                         </select>
                         <div class="col-span-6 sm:col-span-3">

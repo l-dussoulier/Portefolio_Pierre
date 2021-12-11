@@ -46,10 +46,15 @@ class CreateController extends Controller
             $drawRequest->contact = $request->get('contact');
 
             $drawRequest->id_statut = 1;
+            date_default_timezone_set('Europe/Paris');
+            $drawRequest->created_at = date("d-m-Y H:i:s");
+            if ($request->image != null ) {
+                $path =  Storage::disk('public')->put('images',$request-> image);
 
-            $path =  Storage::disk('public')->put('images',$request-> image);
+                $drawRequest-> linkImage = $path;
+            }
 
-            $drawRequest-> linkImage = $path;
+
 
 
             $drawRequest->save();

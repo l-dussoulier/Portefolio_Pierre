@@ -18,7 +18,7 @@
                     <form action="{{ route('store-draw-requestUser') }}" method="post" class="form-group">
                         @csrf
                         <input hidden type="text" name="id" value="{{ $currentDraw->id }}">
-                        <input type="submit" value="Modifier" class="mb-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ">
+                        <input type="submit" value="Sauvegarder" class="mb-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ">
 
                         <div class="col-span-6 sm:col-span-3 mb-5">
                             <label for="titre" class="block text-sm font-medium text-gray-700">Titre du dessin</label>
