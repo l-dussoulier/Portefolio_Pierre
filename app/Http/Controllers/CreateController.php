@@ -45,7 +45,8 @@ class CreateController extends Controller
             $drawRequest->author_id =Auth::user()->id;
             $drawRequest->contact = $request->get('contact');
 
-            $drawRequest->id_statut = 1;
+            $statut = statut::find(1);
+            $drawRequest->id_statut = $statut->id;
             date_default_timezone_set('Europe/Paris');
             $drawRequest->created_at = date("d-m-Y H:i:s");
             if ($request->image != null ) {
